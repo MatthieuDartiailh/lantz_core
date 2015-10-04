@@ -53,7 +53,7 @@ def test_get_visa_resource_manager(cleanup):
     assert rm is get_visa_resource_manager()
 
     assert rm is not get_visa_resource_manager('@sim')
-    import lantz_core.backends.visa as lv
+    import lantz.core.backends.visa as lv
     assert len(lv._RESOURCE_MANAGERS) == 3
 
 
