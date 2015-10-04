@@ -39,7 +39,7 @@ base_backend = os.path.join(os.path.dirname(__file__), 'base.yaml@sim')
 def cleanup():
     os.environ['LANTZ_VISA'] = '@py'
     yield
-    import lantz_core.backends.visa as lv
+    import lantz.core.backends.visa as lv
     lv._RESOURCE_MANAGERS = None
     del os.environ['LANTZ_VISA']
 

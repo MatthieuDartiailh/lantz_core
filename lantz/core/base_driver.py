@@ -58,9 +58,6 @@ class BaseDriver(with_metaclass(InstrumentSigleton, HasFeatures)):
 
     Parameters
     ----------
-    connection_info : dict
-        Dict containing all the necessary information to open a connection to
-        the instrument
     caching_allowed : bool, optionnal
         Boolean use to determine if instrument properties can be cached
 
