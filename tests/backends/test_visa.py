@@ -16,13 +16,13 @@ import os
 
 import pytest
 
-pytest.importorskip('lantz_core.backends.visa')
+pytest.importorskip('lantz.core.backends.visa')
 pytest.importorskip('pyvisa-sim')
 
 from pyvisa.highlevel import ResourceManager
-from lantz_core.features import Float
-from lantz_core.errors import InterfaceNotSupported
-from lantz_core.backends.visa import (get_visa_resource_manager,
+from lantz.core.features import Float
+from lantz.core.errors import InterfaceNotSupported
+from lantz.core.backends.visa import (get_visa_resource_manager,
                                       set_visa_resource_manager,
                                       BaseVisaDriver,
                                       VisaMessageDriver,

@@ -13,8 +13,8 @@ from __future__ import (division, unicode_literals, print_function,
                         absolute_import)
 from pytest import raises, yield_fixture, mark
 
-from lantz_core import unit
-from lantz_core.unit import set_unit_registry, get_unit_registry
+from lantz.core import unit
+from lantz.core.unit import set_unit_registry, get_unit_registry
 
 try:
     from pint import UnitRegistry

@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 import os.path
 
-version_py = os.path.join(os.path.dirname(__file__), 'lantz_core',
+version_py = os.path.join(os.path.dirname(__file__), 'lantz', 'core',
                           'version.py')
 with open(version_py, 'r') as f:
     d = dict()
@@ -13,7 +13,7 @@ with open(version_py, 'r') as f:
     version = d['__version__']
 
 setup(
-    name = 'lantz_core',
+    name = 'lantz.core',
     description = 'Instrumentation framework',
     version = version,
     long_description = '''Lantz is an automation and instrumentation toolkit

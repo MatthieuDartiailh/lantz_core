@@ -13,12 +13,12 @@ from __future__ import (division, unicode_literals, print_function,
                         absolute_import)
 from pytest import raises
 
-from lantz_core.has_features import (subsystem, set_feat, channel, set_action)
-from lantz_core.subsystem import SubSystem
-from lantz_core.channel import Channel
-from lantz_core.action import Action
-from lantz_core.features.feature import Feature
-from lantz_core.features.util import (append, prepend, add_after, add_before,
+from lantz.core.has_features import (subsystem, set_feat, channel, set_action)
+from lantz.core.subsystem import SubSystem
+from lantz.core.channel import Channel
+from lantz.core.action import Action
+from lantz.core.features.feature import Feature
+from lantz.core.features.util import (append, prepend, add_after, add_before,
                                       replace)
 
 from .testing_tools import DummyParent

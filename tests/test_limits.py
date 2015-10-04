@@ -13,9 +13,9 @@ from __future__ import (division, unicode_literals, print_function,
                         absolute_import)
 from pytest import raises, mark
 
-from lantz_core.limits import IntLimitsValidator, FloatLimitsValidator
-from lantz_core import unit
-from lantz_core.unit import get_unit_registry
+from lantz.core.limits import IntLimitsValidator, FloatLimitsValidator
+from lantz.core import unit
+from lantz.core.unit import get_unit_registry
 
 
 def teardown_module():

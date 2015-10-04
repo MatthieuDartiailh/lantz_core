@@ -13,7 +13,7 @@ from __future__ import (division, unicode_literals, print_function,
                         absolute_import)
 from threading import RLock
 
-from lantz_core.has_features import HasFeatures
+from lantz.core.has_features import HasFeatures
 
 
 class DummyParent(HasFeatures):

@@ -14,9 +14,9 @@ from __future__ import (division, unicode_literals, print_function,
 
 from pytest import mark, raises
 
-from lantz_core.action import Action
-from lantz_core.limits import IntLimitsValidator
-from lantz_core.unit import UNIT_SUPPORT, get_unit_registry
+from lantz.core.action import Action
+from lantz.core.limits import IntLimitsValidator
+from lantz.core.unit import UNIT_SUPPORT, get_unit_registry
 from .testing_tools import DummyParent
 
 

@@ -14,8 +14,8 @@ from __future__ import (division, unicode_literals, print_function,
 
 import pytest
 
-from lantz_core.features.limits_validated import LimitsValidated
-from lantz_core.limits import IntLimitsValidator
+from lantz.core.features.limits_validated import LimitsValidated
+from lantz.core.limits import IntLimitsValidator
 
 from ..testing_tools import DummyParent
 from .test_feature import TestFeatureInit

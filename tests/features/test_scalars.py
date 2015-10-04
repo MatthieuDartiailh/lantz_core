@@ -14,11 +14,11 @@ from __future__ import (division, unicode_literals, print_function,
 
 from pytest import raises, mark
 
-from lantz_core.features.enumerable import Enumerable
-from lantz_core.features.scalars import Unicode, Int, Float
-from lantz_core.limits import IntLimitsValidator, FloatLimitsValidator
-from lantz_core.unit import get_unit_registry, UNIT_SUPPORT
-from lantz_core.has_features import set_feat
+from lantz.core.features.enumerable import Enumerable
+from lantz.core.features.scalars import Unicode, Int, Float
+from lantz.core.limits import IntLimitsValidator, FloatLimitsValidator
+from lantz.core.unit import get_unit_registry, UNIT_SUPPORT
+from lantz.core.has_features import set_feat
 
 from ..testing_tools import DummyParent
 from .test_mappings import TestMappingInit

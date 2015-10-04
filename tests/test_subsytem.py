@@ -12,8 +12,8 @@
 from __future__ import (division, unicode_literals, print_function,
                         absolute_import)
 
-from lantz_core.has_features import subsystem
-from lantz_core.subsystem import SubSystem
+from lantz.core.has_features import subsystem
+from lantz.core.subsystem import SubSystem
 from .testing_tools import DummyParent
 
 

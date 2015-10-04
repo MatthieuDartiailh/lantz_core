@@ -12,6 +12,6 @@
 from __future__ import (division, unicode_literals, print_function,
                         absolute_import)
 
-from lantz_core import version
+from lantz.core import version
 
 assert version.__version__

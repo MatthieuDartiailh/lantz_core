@@ -13,7 +13,7 @@ from __future__ import (division, unicode_literals, print_function,
                         absolute_import)
 from pytest import raises
 
-from lantz_core.features.util import (MethodsComposer, PreGetComposer,
+from lantz.core.features.util import (MethodsComposer, PreGetComposer,
                                       PostGetComposer, PreSetComposer,
                                       PostSetComposer)
 

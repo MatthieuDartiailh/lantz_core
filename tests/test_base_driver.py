@@ -13,7 +13,7 @@ from __future__ import (division, unicode_literals, print_function,
                         absolute_import)
 from pytest import raises
 
-from lantz_core.base_driver import BaseDriver
+from lantz.core.base_driver import BaseDriver
 
 
 def test_bdriver_multiple_creation():

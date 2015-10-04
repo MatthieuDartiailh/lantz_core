@@ -14,9 +14,9 @@ from __future__ import (division, unicode_literals, print_function,
 from pytest import raises
 from stringparser import Parser
 
-from lantz_core.features.feature import Feature, get_chain, set_chain
-from lantz_core.features.util import PostGetComposer
-from lantz_core.errors import LantzError
+from lantz.core.features.feature import Feature, get_chain, set_chain
+from lantz.core.features.util import PostGetComposer
+from lantz.core.errors import LantzError
 from ..testing_tools import DummyParent
 
 

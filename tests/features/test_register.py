@@ -13,7 +13,7 @@ from __future__ import (division, unicode_literals, print_function,
                         absolute_import)
 from pytest import raises
 
-from lantz_core.features.register import Register
+from lantz.core.features.register import Register
 
 from .test_mappings import TestMappingInit
 

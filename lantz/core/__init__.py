@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-    lantz_core
+    lantz.core
     ~~~~~~~~~~
 
     An automation and instrumentation toolkit with a clean, well-designed and

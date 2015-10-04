@@ -12,7 +12,7 @@
 from __future__ import (division, unicode_literals, print_function,
                         absolute_import)
 
-from lantz_core.has_features import channel
+from lantz.core.has_features import channel
 from .testing_tools import DummyParent
 
 
