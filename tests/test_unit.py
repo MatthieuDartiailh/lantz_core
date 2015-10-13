@@ -51,4 +51,5 @@ def test_converters(teardown):
 
     """
     val = 1.0
+    assert to_float(val) == val
     assert to_float(to_quantity(val, 'A')) == val
