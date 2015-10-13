@@ -15,5 +15,8 @@ from __future__ import (division, unicode_literals, print_function,
 from .bool import Bool
 from .scalars import Unicode, Int, Float
 from .register import Register
+from .alias import Alias
+from .util import constant, conditional
 
-__all__ = ['Bool', 'Unicode', 'Int', 'Float', 'Register']
+__all__ = ['Bool', 'Unicode', 'Int', 'Float', 'Register', 'Alias', 'constant',
+           'conditional']
