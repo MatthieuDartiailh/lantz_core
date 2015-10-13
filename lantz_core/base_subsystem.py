@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-    lantz_core.subsystem
-    ~~~~~~~~~~~~~~~~~~~~
+    lantz_core.base_subsystem
+    ~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Subsystems can be used to give a hierarchical organisation to a driver.
 

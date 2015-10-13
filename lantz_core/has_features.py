@@ -238,11 +238,11 @@ def make_cls_from_subpart(parent_name, part_name, part, base, docs):
         bases = part._bases_
         if (isinstance(part, subsystem) and
                 (not bases or not issubclass(bases[0], AbstractSubSystem))):
-            from .subsystem import SubSystem
+            from .base_subsystem import SubSystem
             bases = tuple([SubSystem] + list(bases))
         elif (isinstance(part, channel) and
                 (not bases or not issubclass(bases[0], AbstractChannel))):
-            from .channel import Channel
+            from .base_channel import Channel
             bases = tuple([Channel] + list(bases))
 
     # Extract the docstring specific to this subpart.
@@ -527,7 +527,6 @@ class HasFeatures(with_metaclass(HasFeaturesMeta, object)):
 
         self._cache = {}
         self._limits_cache = {}
-        self._proxies = {}
 
         subsystems = self.__subsystems__
         channels = self.__channels__
@@ -541,7 +540,7 @@ class HasFeatures(with_metaclass(HasFeaturesMeta, object)):
 
         # Creating a channel container for each kind of declared channels.
         for ch, (cls, listing) in channels.items():
-            from .channel import ChannelContainer
+            from .base_channel import ChannelContainer
             ch_holder = ChannelContainer(cls, self, ch, listing)
             setattr(self, ch, ch_holder)
 
@@ -569,12 +568,12 @@ class HasFeatures(with_metaclass(HasFeaturesMeta, object)):
         ----------
         subsystems : bool, optional
             Whether or not to clear the subsystems. This argument is used only
-            if properties is None.
+            if features is None.
         channels : bool, optional
             Whether or not to clear the channels. This argument is used only
-            if properties is None.
+            if features is None.
         features : iterable of str, optional
-            Name of the properties whose cache should be cleared. Dotted names
+            Name of the features whose cache should be cleared. Dotted names
             can be used to access subsystems and channels. When accessing
             channels the cache of all instances is cleared. All caches
             will be cleared if not specified.

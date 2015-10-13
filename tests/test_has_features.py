@@ -14,8 +14,8 @@ from __future__ import (division, unicode_literals, print_function,
 from pytest import raises
 
 from lantz_core.has_features import (subsystem, set_feat, channel, set_action)
-from lantz_core.subsystem import SubSystem
-from lantz_core.channel import Channel
+from lantz_core.base_subsystem import SubSystem
+from lantz_core.base_channel import Channel
 from lantz_core.action import Action
 from lantz_core.features.feature import Feature
 from lantz_core.features.util import (append, prepend, add_after, add_before,

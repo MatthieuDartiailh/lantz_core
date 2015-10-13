@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-    lantz_core.channel
-    ~~~~~~~~~~~~~
+    lantz_core.base_channel
+    ~~~~~~~~~~~~~~~~~~~~~~~
 
     Channel simplifies the writing of instrument implementing channel specific
     behaviours.
@@ -14,7 +14,7 @@ from __future__ import (division, unicode_literals, print_function,
                         absolute_import)
 
 from .has_features import AbstractChannel
-from .subsystem import SubSystem
+from .base_subsystem import SubSystem
 
 
 class Channel(SubSystem):
