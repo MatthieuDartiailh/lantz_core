@@ -461,6 +461,7 @@ def test_subsystem_declaration1():
     assert DeclareSubsystem.sub_test.__doc__ == 'Subsystem docstring'
     d = DeclareSubsystem()
     assert d.__subsystems__
+    assert type(d.sub_test) is DeclareSubsystem.sub_test
     assert isinstance(d.sub_test, SubSystem)
 
 
@@ -573,6 +574,7 @@ def test_channel_declaration1():
 
     d = DeclareChannel()
     assert d.__channels__
+    assert d.ch is not DeclareChannel.ch
     assert d.ch.available == (1,)
     ch = d.ch[1]
     assert isinstance(ch, Dummy)

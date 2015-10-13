@@ -434,7 +434,6 @@ class HasFeaturesMeta(type):
                              else inherited_ch[k][1])
                 aliases = (part._ch_aliases_ if part._ch_aliases_ else
                            inherited_ch[k][2])
-                print(k, available, aliases)
                 channels[part_name] = (ch_cls, available, aliases)
 
             else:
