@@ -29,6 +29,11 @@ class ChParent2(DummyParent):
     ch = channel(('a',))
 
 
+class ChParent3(DummyParent):
+
+    ch = channel(('a',), aliases={0: 'a'})
+
+
 def test_ch_d_get():
 
     a = ChParent1()
@@ -70,3 +75,10 @@ def test_ch_reop():
     ch = a.ch[1]
     ch.reopen_connection()
     assert a.ropen_called == 1
+
+
+def test_listing_aliases():
+    a = ChParent3()
+    aliases = a.ch.aliases
+    assert a.ch.aliases is not aliases
+    assert a.ch.aliases == aliases

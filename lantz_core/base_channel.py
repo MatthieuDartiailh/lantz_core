@@ -91,29 +91,40 @@ class ChannelContainer(object):
     name : unicode
         Name of the channel subpart on the parent.
 
-    list_available : unicode
-        Name of the parent method to use to query the available channels.
+    list_available : callable
+        Function to call to query the list of available channels.
+
+    aliases : dict
+        Dict mapping aliases names to the real channel id to use.
 
     """
 
-    def __init__(self, cls, parent, name, available):
+    def __init__(self, cls, parent, name, list_available, aliases):
         self._cls = cls
         self._channels = {}
         self._name = name
         self._parent = parent
-        if isinstance(available, (tuple, list)):
-            self._list = lambda: available
-        else:
-            self._list = getattr(parent, available)
+        self._aliases = aliases
+        self._list = list_available
 
     @property
     def available(self):
         """List the available channels.
 
         """
-        return self._list()
+        return self._list(self._parent)
+
+    @property
+    def aliases(self):
+        """List the aliases.
+
+        """
+        return self._aliases.copy()
 
     def __getitem__(self, ch_id):
+        if ch_id in self._aliases:
+            ch_id = self._aliases[ch_id]
+
         if ch_id in self._channels:
             return self._channels[ch_id]
 

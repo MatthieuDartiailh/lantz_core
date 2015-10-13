@@ -614,6 +614,28 @@ def test_channel_declaration3():
             ch = channel()
 
 
+def test_channel_declaration4():
+    """Test declaring channel aliases.
+
+    """
+
+    class DeclareChannel(DummyParent):
+
+        ch = channel((1,))
+
+    class OverrideChannel(DeclareChannel):
+
+        ch = channel(aliases={'Test': 1})
+
+    class OverrideChannel2(OverrideChannel):
+
+        ch = channel()
+
+    d = OverrideChannel2()
+    assert tuple(d.ch.available) == (1, 'Test')
+    assert d.ch['Test'].id == 1
+
+
 # --- Test cache handling -----------------------------------------------------
 
 class TestHasFeaturesCache(object):

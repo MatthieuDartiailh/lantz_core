@@ -14,12 +14,14 @@
 """
 from __future__ import (division, unicode_literals, print_function,
                         absolute_import)
-from future.utils import with_metaclass
+
 from types import FunctionType
 from inspect import cleandoc, getsourcelines, currentframe
 from itertools import chain
 from abc import ABCMeta
 from collections import defaultdict
+
+from future.utils import with_metaclass
 
 from .features.feature import Feature
 
@@ -197,10 +199,29 @@ class channel(_subpart):
         Class or classes to use as base class when no matching subpart exists
         on the driver.
 
+    aliases : dict, optional
+        Dictionary providing aliases for channels ids. Aliases can be simple
+        values, list or tuple.
+
     """
-    def __init__(self, available=None, bases=()):
+    def __init__(self, available=None, bases=(), aliases=None):
         super(channel, self).__init__(bases)
         self._available_ = available
+        self._ch_aliases_ = aliases if aliases else {}
+
+
+def make_list_function(available, aliases):
+    """Build the function used to list the available channels.
+
+    """
+    if isinstance(available, (tuple, list)):
+        if aliases:
+            return lambda driver: chain(available, aliases.keys())
+        else:
+            return lambda driver: available
+
+    else:
+        return lambda driver: getattr(driver, available)()
 
 
 def make_cls_from_subpart(parent_name, part_name, part, base, docs):
@@ -409,9 +430,12 @@ class HasFeaturesMeta(type):
                                                docs)
 
                 # Must be valid otherwise parent declaration would be messed up
-                available = (part._available_ if part._available_ else
-                             inherited_ch[k][1])
-                channels[part_name] = (ch_cls, available)
+                available = (part._available if part._available_
+                             else inherited_ch[k][1])
+                aliases = (part._ch_aliases_ if part._ch_aliases_ else
+                           inherited_ch[k][2])
+                print(k, available, aliases)
+                channels[part_name] = (ch_cls, available, aliases)
 
             else:
                 if isinstance(part, subsystem):
@@ -425,7 +449,8 @@ class HasFeaturesMeta(type):
                     if not part._available_:
                         msg = 'No way to identify channels defined for {}'
                         raise ValueError(msg.format(k))
-                    channels[part_name] = (ch_cls, part._available_)
+                    channels[part_name] = (ch_cls, part._available_,
+                                           part._ch_aliases_)
 
         # Put references to the subsystem and channel classes on the class.
         for k, v in subsystems.items():
@@ -539,9 +564,11 @@ class HasFeatures(with_metaclass(HasFeaturesMeta, object)):
             setattr(self, ss, subsystem)
 
         # Creating a channel container for each kind of declared channels.
-        for ch, (cls, listing) in channels.items():
+        for ch, (cls, available, aliases) in channels.items():
             from .base_channel import ChannelContainer
-            ch_holder = ChannelContainer(cls, self, ch, listing)
+            listing_function = make_list_function(available, aliases)
+            ch_holder = ChannelContainer(cls, self, ch, listing_function,
+                                         aliases)
             setattr(self, ch, ch_holder)
 
     def get_feat(self, name):
