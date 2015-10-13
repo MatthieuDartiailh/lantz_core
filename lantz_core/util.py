@@ -23,8 +23,7 @@ def build_checker(checks, signature, ret=''):
     Parameters
     ----------
     checks : unicode
-        ; separated string containing boolean test to assert. '{' and '}'
-        delimit field which should be replaced by instrument state.
+        ; separated string containing boolean test to assert.
 
     signature : unicode or funcsigs.Signature
         Signature of the check function to build.
@@ -116,9 +115,8 @@ def byte_to_dict(byte, mapping):
     def bit_conversion(x, i):
             return bool(x & (1 << i))
 
-    return OrderedDict((n, bit_conversion(byte, i))
-                       for i, n in enumerate(mapping)
-                       if n is not None)
+    return OrderedDict((n or i, bit_conversion(byte, i))
+                       for i, n in enumerate(mapping))
 
 
 def dict_to_byte(values, mapping):

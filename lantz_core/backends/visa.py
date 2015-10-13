@@ -399,7 +399,7 @@ class VisaMessageDriver(BaseVisaDriver):
     def read_status_byte(self):
         return byte_to_dict(self._resource.read_stb(), self.STATUS_BYTE)
 
-    def default_get_feature(self, iprop, cmd, *args, **kwargs):
+    def default_get_feature(self, feat, cmd, *args, **kwargs):
         """Query the value using the provided command.
 
         The command is formatted using the provided args and kwargs before
@@ -408,7 +408,7 @@ class VisaMessageDriver(BaseVisaDriver):
         """
         return self._resource.query(cmd.format(*args, **kwargs))
 
-    def default_set_feature(self, iprop, cmd, *args, **kwargs):
+    def default_set_feature(self, feat, cmd, *args, **kwargs):
         """Set the iproperty value of the instrument.
 
         The command is formatted using the provided args and kwargs before

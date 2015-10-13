@@ -46,8 +46,7 @@ class Register(Feature):
             # Makes sure every key is unique by using the bit index if None is
             # found
             for i, n in enumerate(names[:]):
-                if n is None:
-                    names[i] = i
+                names[i] = n or i
 
         self.names = tuple(names)
         self.creation_kwargs['names'] = names
