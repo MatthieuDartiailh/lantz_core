@@ -11,11 +11,13 @@
 """
 from __future__ import (division, unicode_literals, print_function,
                         absolute_import)
+
 from types import MethodType
 from collections import OrderedDict
 from stringparser import Parser
 
-from .util import wrap_custom_feat_method, MethodsComposer, COMPOSERS
+from .util import (wrap_custom_feat_method, MethodsComposer, COMPOSERS,
+                   AbstractGetSetFactory)
 from ..errors import LantzError
 from ..util import build_checker
 
@@ -68,7 +70,7 @@ class Feature(property):
     discard : tuple or dict
         Tuple of names of features whose cached value should be discarded after
         setting the Feature or dictionary specifying a list of feature whose
-        cache should be discarded under the 'feature' key and a list of limits
+        cache should be discarded under the 'features' key and a list of limits
         to discard under the 'limits' key.
 
     Attributes
@@ -87,8 +89,7 @@ class Feature(property):
         self._setter = setter
         self._retries = retries
         self._customs = {}
-        # Don't create the weak values dict if it is not used.
-        self._proxies = ()
+
         self.creation_kwargs = {'getter': getter, 'setter': setter,
                                 'retries': retries, 'checks': checks,
                                 'extract': extract, 'discard': discard}
@@ -97,6 +98,11 @@ class Feature(property):
               self).__init__(self._get if getter is not None else None,
                              self._set if setter is not None else None,
                              self._del)
+
+        if isinstance(getter, AbstractGetSetFactory):
+            self.get = MethodType(getter.build_getter(), self)
+        if isinstance(setter, AbstractGetSetFactory):
+            self.set = MethodType(setter.build_setter(), self)
 
         if checks:
             self._build_checkers(checks)

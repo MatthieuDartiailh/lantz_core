@@ -15,7 +15,7 @@ from pytest import raises
 from stringparser import Parser
 
 from lantz_core.features.feature import Feature, get_chain, set_chain
-from lantz_core.features.util import PostGetComposer
+from lantz_core.features.util import PostGetComposer, constant, conditional
 from lantz_core.errors import LantzError
 from ..testing_tools import DummyParent
 
@@ -110,6 +110,36 @@ def test_del():
     assert driver.d_set_called == 2
 
 
+def test_getter_factory():
+    """Test using a getter factory.
+
+    """
+    class FactoryTester(DummyParent):
+
+        feat = Feature(constant('Test'))
+
+    driver = FactoryTester()
+    assert driver.feat == 'Test'
+
+
+def test_setter_factory():
+    """Test using a factory setter.
+
+    """
+    class FactoryTester(DummyParent):
+
+        state = False
+
+        feat = Feature(setter=conditional('1 if driver.state else 2', True))
+
+    driver = FactoryTester()
+    driver.feat = None
+    assert driver.d_set_cmd == 2
+    driver.state = True
+    driver.feat = True
+    assert driver.d_set_cmd == 1
+
+
 def test_get_chain():
     """Test the get_chain capacity to iterate in case of driver issue.
 
@@ -128,6 +158,7 @@ def test_get_chain():
 
 def test_set_chain():
     """Test the set_chain capacity to iterate in case of driver issue.
+
     """
     driver = DummyParent()
     driver.retries_exceptions = (LantzError,)
