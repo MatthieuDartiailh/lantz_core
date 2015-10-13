@@ -14,7 +14,8 @@ from __future__ import (division, unicode_literals, print_function,
 from pytest import raises, yield_fixture, mark
 
 from lantz_core import unit
-from lantz_core.unit import set_unit_registry, get_unit_registry
+from lantz_core.unit import (set_unit_registry, get_unit_registry,
+                             to_float, to_quantity)
 
 try:
     from pint import UnitRegistry
@@ -43,3 +44,11 @@ def test_reset_unit_registry(teardown):
     set_unit_registry(ureg)
     with raises(ValueError):
         set_unit_registry(ureg)
+
+
+def test_converters(teardown):
+    """Test to_quantity and to_float utility functions.
+
+    """
+    val = 1.0
+    assert to_float(to_quantity(val, 'A')) == val

@@ -70,3 +70,34 @@ def get_unit_registry():
         UNIT_REGISTRY = UnitRegistry()
 
     return UNIT_REGISTRY
+
+
+def to_float(value):
+    """Convert a value which could be a Quantity to a float.
+
+    """
+    try:
+        return value.m if UNIT_SUPPORT else value
+    except AttributeError:
+        return value
+
+
+def to_quantity(value, unit):
+    """Turn a value into a Quantity with the given unit.
+
+    This is a no-op if unit support is not available.
+
+    Parameters
+    ----------
+    value : float
+        Value to cast.
+
+    unit : unicode
+        Unit of the quantity to create.
+
+    """
+    if UNIT_SUPPORT:
+        ureg = get_unit_registry()
+        value *= ureg.parse_expression(unit)
+
+    return value
